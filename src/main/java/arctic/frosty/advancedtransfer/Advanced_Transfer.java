@@ -32,12 +32,12 @@ public class Advanced_Transfer extends JavaPlugin {
     @Override
     public void onEnable() {
         if (!setupEconomy() ) {
-            getLogger().severe("[%s] Vault is not found!");
+            getLogger().severe("Vault is not found!");
             getServer().getPluginManager().disablePlugin(this);
         }
 
         if (getServer().getPluginManager().getPlugin("Essentials") == null) {
-            getLogger().warning("Essentials plugin is not found!");
+            getLogger().warning("Essentials is not found!");
             Bukkit.getLogger().warning("You can safely ignore this warning.");
         }
 
@@ -51,7 +51,7 @@ public class Advanced_Transfer extends JavaPlugin {
             if (!getLogFile().exists()) {
                 getLogFile().createNewFile();
                 FileWriter writer = new FileWriter(getLogFile(), true);
-                writer.write("========================================[Transaction Logs]========================================\n");
+                writer.write("==============================[Transaction Logs]==============================\n");
                 writer.close();
             }
         } catch (IOException e) {
@@ -72,9 +72,8 @@ public class Advanced_Transfer extends JavaPlugin {
             saveConfig();
         }
 
-        for (String s : Arrays.asList("transfer", "advanced-transfer")) {
-            Objects.requireNonNull(getCommand(s)).setExecutor(this);
-        }
+        Objects.requireNonNull(getCommand("transfer")).setExecutor(this);
+        Objects.requireNonNull(getCommand("advanced-transfer")).setExecutor(this);
 
         saveDefaultConfig();
         Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "Plugin has been enabled!&f"));
@@ -261,7 +260,7 @@ public class Advanced_Transfer extends JavaPlugin {
     private String getPrefix() {
         return getConfig().getString("Prefix");
     }
-    private char getSymbol() {
-        return getConfig().getCharacterList("Symbol").get(0);
+    private String getSymbol() {
+        return getConfig().getString("Currency");
     }
 }
