@@ -36,6 +36,11 @@ public class Advanced_Transfer extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
         }
 
+        if (getServer().getPluginManager().getPlugin("Essentials") == null) {
+            getLogger().warning("Essentials plugin is not found!");
+            Bukkit.getLogger().warning("You can safely ignore this warning.");
+        }
+
         try {
             if (!getDataFolder().exists()) {
                 getDataFolder().mkdir();
@@ -71,7 +76,7 @@ public class Advanced_Transfer extends JavaPlugin {
         saveDefaultConfig();
         Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "Plugin has been enabled!&f"));
     }
-
+    //Setup Vault Economy
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
@@ -218,7 +223,7 @@ public class Advanced_Transfer extends JavaPlugin {
             player.sendMessage("§cError: §4Illegal input.");
         }
     }
-
+    //Format Conversion
     private static long parseAmount(@NotNull String strAmount) {
         long amount = 0;
         try {
