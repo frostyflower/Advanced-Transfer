@@ -1,0 +1,14 @@
+name: Advanced-Transfer
+version: '${project.version}'
+main: arctic.frosty.advancedtransfer.Advanced_Transfer
+api-version: '1.20'
+commands:
+  transfer:
+    description: 'Transfer funds from one player to another.'
+    usage: '/transfer <player> <amount>'
+    aliases: ['pay']
+  advanced-transfer:
+    description: 'Advanced paying plugin.'
+    usage: '/advanced-pay <player> <amount>'
+    aliases: ['at']
+    permission: advancedtransfer.admin

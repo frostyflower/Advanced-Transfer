@@ -1,0 +1,23 @@
+# An advanced paying plugin by Arctic_FrostyMC.
+
+# Plugin Prefix.
+Prefix: "&a[Advanced-Transfer] "
+
+# Currency symbol.
+Currency: '$'
+
+# Maximum paying amount.
+Max: 1000000
+
+# Change Timezone to display the correct time for your server.
+# Follow this link to find your desired timezone.
+# https://docs.oracle.com/middleware/12211/wcs/tag-ref/MISC/TimeZones.html
+# Example: "America/New_York"
+Timezone: "default"
+
+# Logging threshold.
+# Set the threshold (Transferring amount) for the logger to write to the log file.
+Threshold: 10000
+
+# Log the transaction to console.
+Log: true
