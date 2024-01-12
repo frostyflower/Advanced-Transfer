@@ -50,6 +50,9 @@ public class Advanced_Transfer extends JavaPlugin {
             logFile = new File(getDataFolder(), "Transaction_log.txt");
             if (!getLogFile().exists()) {
                 getLogFile().createNewFile();
+                FileWriter writer = new FileWriter(getLogFile(), true);
+                writer.write("========================================[Transaction Logs]========================================\n");
+                writer.close();
             }
         } catch (IOException e) {
             getServer().getPluginManager().disablePlugin(this);
