@@ -26,7 +26,7 @@ public class Advanced_Transfer extends JavaPlugin {
     private static File logFile;
     @Override
     public void onDisable() {
-        Bukkit.getLogger().info(getPrefix() + "Plugin has been disabled!");
+        Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "&cPlugin has been disabled!&f"));
     }
 
     @Override
@@ -76,7 +76,7 @@ public class Advanced_Transfer extends JavaPlugin {
         Objects.requireNonNull(getCommand("advanced-transfer")).setExecutor(this);
 
         saveDefaultConfig();
-        Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "Plugin has been enabled!&f"));
+        Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "&aPlugin has been enabled!&f"));
     }
     //Setup Vault Economy
     private boolean setupEconomy() {
