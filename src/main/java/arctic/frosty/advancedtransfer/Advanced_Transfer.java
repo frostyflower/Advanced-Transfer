@@ -28,7 +28,7 @@ public class Advanced_Transfer extends JavaPlugin {
     @Override
     public void onEnable() {
         if (!setupEconomy()) {
-            getLogger().severe("Vault is not found!");
+            getLogger().severe("Probably dependency is missing!");
             getServer().getPluginManager().disablePlugin(this);
         }
 
@@ -54,28 +54,29 @@ public class Advanced_Transfer extends JavaPlugin {
             Objects.requireNonNull(getCommand(s)).setExecutor(this);
         }
 
-        try {
-            saveDefaultConfig();
-            if (getConfig().getInt("Max") <= 0) {
-                Bukkit.getLogger().warning("Max must be greater than 0!");
-                Bukkit.getLogger().warning("Setting Max to 10000.");
-                getConfig().set("Max", 1000000);
-            }
-            if (getConfig().getInt("Threshold") <= 0) {
-                Bukkit.getLogger().warning("Threshold must be greater than 0!");
-                Bukkit.getLogger().warning("Setting Threshold to 10000.");
-                getConfig().set("Threshold", 10000);
-            }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Probably dependency is missing!", e);
+        saveDefaultConfig();
+
+        if (getConfig().getInt("Max") <= 0) {
+            Bukkit.getLogger().warning("Max must be greater than 0!");
+            Bukkit.getLogger().warning("Setting Max to 10000.");
+            getConfig().set("Max", 1000000);
+        }
+        if (getConfig().getInt("Threshold") <= 0) {
+            Bukkit.getLogger().warning("Threshold must be greater than 0!");
+            Bukkit.getLogger().warning("Setting Threshold to 10000.");
+            getConfig().set("Threshold", 10000);
         }
 
+        saveConfig();
         Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "&aPlugin has been enabled!&f"));
     }
 
     //Setup Vault Economy
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        if (getServer().getPluginManager().getPlugin("Essentials") == null) {
             return false;
         }
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
@@ -221,6 +222,7 @@ public class Advanced_Transfer extends JavaPlugin {
             player.sendMessage("§cError: §4Illegal input.");
         }
     }
+
     //Format Conversion
     private static long parseAmount(@NotNull String strAmount) {
         long amount = 0;
