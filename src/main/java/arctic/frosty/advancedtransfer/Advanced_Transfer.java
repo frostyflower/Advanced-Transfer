@@ -24,21 +24,12 @@ import java.util.*;
 public class Advanced_Transfer extends JavaPlugin {
     private static Economy economy;
     private static File logFile;
-    @Override
-    public void onDisable() {
-        Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "&cPlugin has been disabled!&f"));
-    }
 
     @Override
     public void onEnable() {
-        if (!setupEconomy() ) {
+        if (!setupEconomy()) {
             getLogger().severe("Vault is not found!");
             getServer().getPluginManager().disablePlugin(this);
-        }
-
-        if (getServer().getPluginManager().getPlugin("Essentials") == null) {
-            getLogger().warning("Essentials is not found!");
-            Bukkit.getLogger().warning("You can safely ignore this warning.");
         }
 
         try {
@@ -59,25 +50,29 @@ public class Advanced_Transfer extends JavaPlugin {
             throw new RuntimeException(e);
         }
 
-        if (getConfig().getInt("Max") <= 0) {
-            Bukkit.getLogger().warning("Max must be greater than 0!");
-            Bukkit.getLogger().warning("Setting Max to 10000.");
-            getConfig().set("Max", 1000000);
-            saveConfig();
-        }
-        if (getConfig().getInt("Threshold") <= 0) {
-            Bukkit.getLogger().warning("Threshold must be greater than 0!");
-            Bukkit.getLogger().warning("Setting Threshold to 10000.");
-            getConfig().set("Threshold", 10000);
-            saveConfig();
+        for (String s : Arrays.asList("transfer", "advanced-transfer")) {
+            Objects.requireNonNull(getCommand(s)).setExecutor(this);
         }
 
-        Objects.requireNonNull(getCommand("transfer")).setExecutor(this);
-        Objects.requireNonNull(getCommand("advanced-transfer")).setExecutor(this);
+        try {
+            saveDefaultConfig();
+            if (getConfig().getInt("Max") <= 0) {
+                Bukkit.getLogger().warning("Max must be greater than 0!");
+                Bukkit.getLogger().warning("Setting Max to 10000.");
+                getConfig().set("Max", 1000000);
+            }
+            if (getConfig().getInt("Threshold") <= 0) {
+                Bukkit.getLogger().warning("Threshold must be greater than 0!");
+                Bukkit.getLogger().warning("Setting Threshold to 10000.");
+                getConfig().set("Threshold", 10000);
+            }
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Probably dependency is missing!", e);
+        }
 
-        saveDefaultConfig();
         Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "&aPlugin has been enabled!&f"));
     }
+
     //Setup Vault Economy
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
@@ -140,6 +135,7 @@ public class Advanced_Transfer extends JavaPlugin {
         }
         return true;
     }
+
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         if (command.getName().equalsIgnoreCase("transfer")) {
