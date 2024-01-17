@@ -1,6 +1,6 @@
 package arctic.frosty.advancedtransfer;
 
-public class Ansi {
+public class Util {
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_BLACK = "\u001B[0;30m";
     private static final String ANSI_DARK_BLUE = "\u001B[0;34m";

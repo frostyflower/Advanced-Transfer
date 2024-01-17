@@ -35,8 +35,8 @@ public class Advanced_Transfer extends JavaPlugin {
         try {
             if (!getDataFolder().exists()) {
                 getDataFolder().mkdir();
-                Bukkit.getLogger().info(Ansi.convertToAnsi("&ePlease disable /pay command in Essentials config for better functionality!&f"));
-                Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "Created data folder.&f"));
+                Bukkit.getLogger().info(Util.convertToAnsi("&ePlease disable /pay command in Essentials config for better functionality!&f"));
+                Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "Created data folder.&f"));
             }
             logFile = new File(getDataFolder(), "Transaction_log.txt");
             if (!getLogFile().exists()) {
@@ -68,7 +68,7 @@ public class Advanced_Transfer extends JavaPlugin {
         }
 
         saveConfig();
-        Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "&aPlugin has been enabled!&f"));
+        Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "&aPlugin has been enabled!&f"));
     }
 
     //Setup Vault Economy
@@ -96,7 +96,7 @@ public class Advanced_Transfer extends JavaPlugin {
             } else if ((args.length == 1) && (args[0].equalsIgnoreCase("reload"))) {
                 if (!(sender instanceof Player)) {
                     reloadConfig();
-                    Bukkit.getLogger().info(Ansi.convertToAnsi(getPrefix() + "&aPlugin configuration reloaded.&f"));
+                    Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "&aPlugin configuration reloaded.&f"));
                 } else if (sender.hasPermission("advancedtransfer.admin")) {
                     reloadConfig();
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getPrefix() + "&aPlugin configuration reloaded."));
@@ -110,7 +110,7 @@ public class Advanced_Transfer extends JavaPlugin {
         }
         if (command.getName().equalsIgnoreCase("transfer")) {
             if (!(sender instanceof Player)) {
-                Bukkit.getLogger().info(Ansi.convertToAnsi("&4This command cannot be used on console!"));
+                Bukkit.getLogger().info(Util.convertToAnsi("&4This command cannot be used on console!"));
             } else if (args.length == 1) {
                 return false;
             } else if (args.length == 2) {
@@ -181,7 +181,7 @@ public class Advanced_Transfer extends JavaPlugin {
                                     target.sendMessage("§aYou received " + getSymbol() + number + " from " + player.getName() + ".");
 
                                     if (getConfig().getBoolean("Log")) {
-                                        Bukkit.getLogger().info(Ansi.convertToAnsi("&a[Log] " + player.getName() + " transferred " + getSymbol() + number + " to " + target.getName() + ".&f"));
+                                        Bukkit.getLogger().info(Util.convertToAnsi("&a[Log] " + player.getName() + " transferred " + getSymbol() + number + " to " + target.getName() + ".&f"));
                                     }
 
                                     FileWriter write_log = new FileWriter(getLogFile(), true);
@@ -199,7 +199,7 @@ public class Advanced_Transfer extends JavaPlugin {
                                 target.sendMessage("§aYou received " + getSymbol() + number + " from " + player.getName() + ".");
 
                                 if (getConfig().getBoolean("Log")) {
-                                    Bukkit.getLogger().info(Ansi.convertToAnsi("&a[Log] " + player.getName() + " transferred " + getSymbol() + number + " to " + target.getName() + ".&f"));
+                                    Bukkit.getLogger().info(Util.convertToAnsi("&a[Log] " + player.getName() + " transferred " + getSymbol() + number + " to " + target.getName() + ".&f"));
                                 }
                             } else {
                                 throw new RuntimeException("Error: Threshold is set to 0 or negative number.");
