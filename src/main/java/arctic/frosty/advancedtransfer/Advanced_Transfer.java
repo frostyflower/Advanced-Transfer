@@ -2,7 +2,6 @@ package arctic.frosty.advancedtransfer;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -20,13 +19,17 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-@SuppressWarnings({"unused", "deprecation", "ResultOfMethodCallIgnored"})
+@SuppressWarnings({"unused", "ResultOfMethodCallIgnored"})
 public class Advanced_Transfer extends JavaPlugin {
     private static Economy economy;
     private static File logFile;
 
     @Override
     public void onEnable() {
+        long startTime = System.currentTimeMillis();
+
+        this.saveDefaultConfig();
+
         if (!setupEconomy()) {
             getLogger().severe("Probably dependency is missing!");
             getServer().getPluginManager().disablePlugin(this);
@@ -35,7 +38,7 @@ public class Advanced_Transfer extends JavaPlugin {
         try {
             if (!getDataFolder().exists()) {
                 getDataFolder().mkdir();
-                Bukkit.getLogger().info(Util.convertToAnsi("&ePlease disable /pay command in Essentials config for better functionality!&f"));
+                Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "&ePlease disable /pay command in Essentials config for better functionality!&f"));
                 Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "Created data folder.&f"));
             }
             logFile = new File(getDataFolder(), "Transaction_log.txt");
@@ -54,8 +57,6 @@ public class Advanced_Transfer extends JavaPlugin {
             Objects.requireNonNull(getCommand(s)).setExecutor(this);
         }
 
-        saveDefaultConfig();
-
         if (getConfig().getInt("Max") <= 0) {
             Bukkit.getLogger().warning("Max must be greater than 0!");
             Bukkit.getLogger().warning("Setting Max to 10000.");
@@ -67,8 +68,11 @@ public class Advanced_Transfer extends JavaPlugin {
             getConfig().set("Threshold", 10000);
         }
 
-        saveConfig();
-        Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "&aPlugin has been enabled!&f"));
+        this.saveConfig();
+
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "&aPlugin has been enabled! [" + elapsedTime + "ms]&f"));
     }
 
     //Setup Vault Economy
@@ -95,13 +99,13 @@ public class Advanced_Transfer extends JavaPlugin {
                 return false;
             } else if ((args.length == 1) && (args[0].equalsIgnoreCase("reload"))) {
                 if (!(sender instanceof Player)) {
-                    reloadConfig();
+                    this.reloadConfig();
                     Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "&aPlugin configuration reloaded.&f"));
                 } else if (sender.hasPermission("advancedtransfer.admin")) {
-                    reloadConfig();
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getPrefix() + "&aPlugin configuration reloaded."));
+                    this.reloadConfig();
+                    sender.sendMessage(Util.convertToColoredText(getPrefix() + "&aPlugin configuration reloaded."));
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYou do not have permission."));
+                    sender.sendMessage(Util.convertToColoredText("&cYou do not have permission."));
                 }
                 return true;
             } else {
@@ -116,18 +120,18 @@ public class Advanced_Transfer extends JavaPlugin {
             } else if (args.length == 2) {
                 Player player = (Player) sender;
                 Player target = Bukkit.getServer().getPlayerExact(args[0]);
-                if (target != player) {
+                if (target != sender) {
                     if (target != null) {
                         if (args[1].length() <= 12) {
                             processTransfer(player, target, args[1]);
                         } else {
-                            player.sendMessage("§cError: §4Illegal input.");
+                            sender.sendMessage(Util.convertToColoredText("&cError: &4Illegal input."));
                         }
                     } else {
-                        player.sendMessage("§cError: §4Player not found.");
+                        sender.sendMessage(Util.convertToColoredText("&cError: &4Player not found."));
                     }
                 } else {
-                    player.sendMessage("§cError: §4Can't transfer to yourself.");
+                    sender.sendMessage(Util.convertToColoredText("&cError: &4Can't transfer to yourself."));
                 }
                 return true;
             } else {
@@ -144,7 +148,7 @@ public class Advanced_Transfer extends JavaPlugin {
                 return null;
             }
             if (args.length == 2) {
-                return Arrays.asList("10", "1k", "1m");
+                return Arrays.asList("1", "10", "100", "1k", "1m", "1b");
             }
         }
         if (command.getName().equalsIgnoreCase("advanced-transfer")) {
@@ -239,6 +243,8 @@ public class Advanced_Transfer extends JavaPlugin {
                     amount = suffixAmt * 1000;
                 } else if (strAmount.matches("\\d+m")) {
                     amount = suffixAmt * 1000000;
+                } else if (strAmount.matches("\\d+b")) {
+                    amount = suffixAmt * 1000000000;
                 } else if (strAmount.matches("^\\d+$")) {
                     amount = Long.parseLong(strAmount);
                 }

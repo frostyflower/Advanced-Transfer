@@ -1,5 +1,5 @@
 package arctic.frosty.advancedtransfer;
-
+@SuppressWarnings({"unused"})
 public class Util {
     public static String convertToAnsi(String input) {
         //Colours code
@@ -25,6 +25,23 @@ public class Util {
         input = input.replaceAll("[§&]n", "\u001B[4m");
         input = input.replaceAll("[§&]m", "\u001B[9m");
         input = input.replaceAll("[§&]r", "\u001B[0m");
+
+        return input;
+    }
+
+    public static String convertToColoredText(String input) {
+        //Colours code
+        for (int i = 0; i <= 9; i++) {
+            input = input.replaceAll("&" + i, "§" + i);
+        }
+        for (char c = 'a'; c <= 'f'; c++) {
+            input = input.replaceAll("&" + c, "§" + c);
+        }
+        //Additional Formatting codes
+        char[] additionalFormatting = {'l', 'o', 'n', 'm', 'r'};
+        for (char c : additionalFormatting) {
+            input = input.replaceAll("&" + c, "§" + c);
+        }
 
         return input;
     }

@@ -18,6 +18,5 @@ commands:
   advanced-transfer:
     description: 'Reloading plugin configuration.'
     usage: '§4Usage: §c/advanced-transfer reload'
-    permission: 'advancedtransfer.admin'
     aliases:
       - at
