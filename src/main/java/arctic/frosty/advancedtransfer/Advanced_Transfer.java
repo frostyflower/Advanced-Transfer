@@ -115,12 +115,11 @@ public class Advanced_Transfer extends JavaPlugin {
             } else if (args.length == 1) {
                 return false;
             } else if (args.length == 2) {
-                Player player = (Player) sender;
                 Player target = Bukkit.getServer().getPlayerExact(args[0]);
                 if (target != sender) {
                     if (target != null) {
                         if (args[1].length() <= 12) {
-                            processTransfer(player, target, args[1]);
+                            processTransfer((Player) sender, target, args[1]);
                         } else {
                             sender.sendMessage(Util.convertToColoredText("&cError: &4Illegal input."));
                         }
