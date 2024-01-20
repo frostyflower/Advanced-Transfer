@@ -27,7 +27,6 @@ public class Advanced_Transfer extends JavaPlugin {
     @Override
     public void onEnable() {
         long startTime = System.currentTimeMillis();
-
         this.saveDefaultConfig();
 
         if (!setupEconomy()) {
@@ -53,9 +52,8 @@ public class Advanced_Transfer extends JavaPlugin {
             throw new RuntimeException(e);
         }
 
-        for (String s : Arrays.asList("transfer", "advanced-transfer")) {
-            Objects.requireNonNull(getCommand(s)).setExecutor(this);
-        }
+        Objects.requireNonNull(getCommand("transfer")).setExecutor(this);
+        Objects.requireNonNull(getCommand("advanced-transfer")).setExecutor(this);
 
         if (getConfig().getInt("Max") <= 0) {
             Bukkit.getLogger().warning("Max must be greater than 0!");
@@ -69,7 +67,6 @@ public class Advanced_Transfer extends JavaPlugin {
         }
 
         this.saveConfig();
-
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
         Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "&aPlugin has been enabled! [" + elapsedTime + "ms]&f"));
