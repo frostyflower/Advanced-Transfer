@@ -175,11 +175,8 @@ public class Advanced_Transfer extends JavaPlugin {
                             }
                             if (amount >= getConfig().getInt("Threshold")) {
                                 if (getConfig().getInt("Threshold") > 0) {
-                                    getEconomy().withdrawPlayer(player, amount);
-                                    getEconomy().depositPlayer(target, amount);
-
-                                    player.sendMessage("§aTransferred " + getSymbol() + number + " to " + target.getName() + ".");
-                                    target.sendMessage("§aYou received " + getSymbol() + number + " from " + player.getName() + ".");
+                                    player.sendMessage(Util.convertToColoredText("&aTransferred " + getSymbol() + number + " to " + target.getName() + "."));
+                                    target.sendMessage(Util.convertToColoredText("&aYou received " + getSymbol() + number + " from " + player.getName() + "."));
 
                                     if (getConfig().getBoolean("Log")) {
                                         Bukkit.getLogger().info(Util.convertToAnsi("&a[Log] " + player.getName() + " transferred " + getSymbol() + number + " to " + target.getName() + ".&f"));
@@ -189,38 +186,41 @@ public class Advanced_Transfer extends JavaPlugin {
                                     String logEntry = "[" + currentTime + "]: " + player.getName() + " ---[" + getSymbol() + number + "]---> " + target.getName() + "\n";
                                     write_log.write(logEntry);
                                     write_log.close();
+
+                                    getEconomy().withdrawPlayer(player, amount);
+                                    getEconomy().depositPlayer(target, amount);
                                 } else {
                                     throw new RuntimeException("Error: Threshold is set to 0 or negative number.");
                                 }
                             } else if (getConfig().getInt("Threshold") > 0) {
-                                getEconomy().withdrawPlayer(player, amount);
-                                getEconomy().depositPlayer(target, amount);
-
-                                player.sendMessage("§aTransferred " + getSymbol() + number + " to " + target.getName() + ".");
-                                target.sendMessage("§aYou received " + getSymbol() + number + " from " + player.getName() + ".");
+                                player.sendMessage(Util.convertToColoredText("&aTransferred " + getSymbol() + number + " to " + target.getName() + "."));
+                                target.sendMessage(Util.convertToColoredText("&aYou received " + getSymbol() + number + " from " + player.getName() + "."));
 
                                 if (getConfig().getBoolean("Log")) {
                                     Bukkit.getLogger().info(Util.convertToAnsi("&a[Log] " + player.getName() + " transferred " + getSymbol() + number + " to " + target.getName() + ".&f"));
                                 }
+
+                                getEconomy().withdrawPlayer(player, amount);
+                                getEconomy().depositPlayer(target, amount);
                             } else {
                                 throw new RuntimeException("Error: Threshold is set to 0 or negative number.");
                             }
                         } else {
                             NumberFormat numberFormat = NumberFormat.getIntegerInstance();
                             String numberMax = numberFormat.format(max);
-                            player.sendMessage("§cYou can't transfer more than " + getSymbol() + numberMax + ".");
+                            player.sendMessage(Util.convertToColoredText("&cYou can't transfer more than " + getSymbol() + numberMax + "."));
                         }
                     } else {
-                        player.sendMessage("§cYou don't have enough balance.");
+                        player.sendMessage(Util.convertToColoredText("&cYou don't have enough balance."));
                     }
                 } else {
-                    player.sendMessage("§cError: §4Illegal input.");
+                    player.sendMessage(Util.convertToColoredText("&cError: &4Illegal input."));
                 }
             } else {
-                player.sendMessage("§cError: §4Illegal input.");
+                player.sendMessage(Util.convertToColoredText("&cError: &4Illegal input."));
             }
         } catch (NumberFormatException | IOException e) {
-            player.sendMessage("§cError: §4Illegal input.");
+            player.sendMessage(Util.convertToColoredText("&cError: &4Illegal input."));
         }
     }
 
