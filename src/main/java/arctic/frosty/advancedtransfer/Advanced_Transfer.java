@@ -26,7 +26,7 @@ public class Advanced_Transfer extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        long startTime = System.currentTimeMillis();
+        long timeStart = System.currentTimeMillis();
         this.saveDefaultConfig();
 
         if (!setupEconomy()) {
@@ -67,9 +67,9 @@ public class Advanced_Transfer extends JavaPlugin {
         }
 
         this.saveConfig();
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "&aPlugin has been enabled! [" + elapsedTime + "ms]&f"));
+        long timeEnded = System.currentTimeMillis();
+        long timeElapsed = timeEnded - timeStart;
+        Bukkit.getLogger().info(Util.convertToAnsi(getPrefix() + "&aPlugin has been enabled! [" + timeElapsed + "ms]&f"));
     }
 
     //Setup Vault Economy

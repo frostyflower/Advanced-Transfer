@@ -1,6 +1,7 @@
 package arctic.frosty.advancedtransfer;
 @SuppressWarnings({"unused"})
 public class Util {
+    //Colors code for Console
     public static String convertToAnsi(String input) {
         //Colours code
         input = input.replaceAll("[§&]0", "\u001B[0;30m");
@@ -29,6 +30,7 @@ public class Util {
         return input;
     }
 
+    //Colours code for Minecraft
     public static String convertToColoredText(String input) {
         //Colours code
         for (int i = 0; i <= 9; i++) {
