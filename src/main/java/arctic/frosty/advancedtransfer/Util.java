@@ -1,52 +1,30 @@
 package arctic.frosty.advancedtransfer;
 
 public class Util {
-    private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_BLACK = "\u001B[0;30m";
-    private static final String ANSI_DARK_BLUE = "\u001B[0;34m";
-    private static final String ANSI_DARK_GREEN = "\u001B[0;32m";
-    private static final String ANSI_DARK_AQUA = "\u001B[0;36m";
-    private static final String ANSI_DARK_RED = "\u001B[0;31m";
-    private static final String ANSI_DARK_PURPLE = "\u001B[0;35m";
-    private static final String ANSI_GOLD = "\u001B[0;33m";
-    private static final String ANSI_GRAY = "\u001B[0;37m";
-    private static final String ANSI_DARK_GRAY = "\u001B[0;90m";
-    private static final String ANSI_BLUE = "\u001B[0;94m";
-    private static final String ANSI_GREEN = "\u001B[0;92m";
-    private static final String ANSI_AQUA = "\u001B[0;96m";
-    private static final String ANSI_RED = "\u001B[0;91m";
-    private static final String ANSI_LIGHT_PURPLE = "\u001B[0;95m";
-    private static final String ANSI_YELLOW = "\u001B[0;93m";
-    private static final String ANSI_WHITE = "\u001B[0;97m";
-
-    private static final String ANSI_BOLD = "\u001B[1m";
-    private static final String ANSI_ITALIC = "\u001B[3m";
-    private static final String ANSI_UNDERLINE = "\u001B[4m";
-    private static final String ANSI_STRIKETHROUGH = "\u001B[9m";
-
     public static String convertToAnsi(String input) {
-        input = input.replaceAll("[§&]0", ANSI_BLACK);
-        input = input.replaceAll("[§&]1", ANSI_DARK_BLUE);
-        input = input.replaceAll("[§&]2", ANSI_DARK_GREEN);
-        input = input.replaceAll("[§&]3", ANSI_DARK_AQUA);
-        input = input.replaceAll("[§&]4", ANSI_DARK_RED);
-        input = input.replaceAll("[§&]5", ANSI_DARK_PURPLE);
-        input = input.replaceAll("[§&]6", ANSI_GOLD);
-        input = input.replaceAll("[§&]7", ANSI_GRAY);
-        input = input.replaceAll("[§&]8", ANSI_DARK_GRAY);
-        input = input.replaceAll("[§&]9", ANSI_BLUE);
-        input = input.replaceAll("[§&]a", ANSI_GREEN);
-        input = input.replaceAll("[§&]b", ANSI_AQUA);
-        input = input.replaceAll("[§&]c", ANSI_RED);
-        input = input.replaceAll("[§&]d", ANSI_LIGHT_PURPLE);
-        input = input.replaceAll("[§&]e", ANSI_YELLOW);
-        input = input.replaceAll("[§&]f", ANSI_WHITE);
-
-        input = input.replaceAll("[§&]l", ANSI_BOLD);
-        input = input.replaceAll("[§&]o", ANSI_ITALIC);
-        input = input.replaceAll("[§&]n", ANSI_UNDERLINE);
-        input = input.replaceAll("[§&]m", ANSI_STRIKETHROUGH);
-        input = input.replaceAll("[§&]r", ANSI_RESET);
+        //Colours code
+        input = input.replaceAll("[§&]0", "\u001B[0;30m");
+        input = input.replaceAll("[§&]1", "\u001B[0;34m");
+        input = input.replaceAll("[§&]2", "\u001B[0;32m");
+        input = input.replaceAll("[§&]3", "\u001B[0;36m");
+        input = input.replaceAll("[§&]4", "\u001B[0;31m");
+        input = input.replaceAll("[§&]5", "\u001B[0;35m");
+        input = input.replaceAll("[§&]6", "\u001B[0;33m");
+        input = input.replaceAll("[§&]7", "\u001B[0;37m");
+        input = input.replaceAll("[§&]8", "\u001B[0;90m");
+        input = input.replaceAll("[§&]9", "\u001B[0;94m");
+        input = input.replaceAll("[§&]a", "\u001B[0;92m");
+        input = input.replaceAll("[§&]b", "\u001B[0;96m");
+        input = input.replaceAll("[§&]c", "\u001B[0;91m");
+        input = input.replaceAll("[§&]d", "\u001B[0;95m");
+        input = input.replaceAll("[§&]e", "\u001B[0;93m");
+        input = input.replaceAll("[§&]f", "\u001B[0;97m");
+        //Additional Formatting codes
+        input = input.replaceAll("[§&]l", "\u001B[1m");
+        input = input.replaceAll("[§&]o", "\u001B[3m");
+        input = input.replaceAll("[§&]n", "\u001B[4m");
+        input = input.replaceAll("[§&]m", "\u001B[9m");
+        input = input.replaceAll("[§&]r", "\u001B[0m");
 
         return input;
     }
