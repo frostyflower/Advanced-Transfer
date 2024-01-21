@@ -1,32 +1,45 @@
 package arctic.frosty.advancedtransfer;
+
 @SuppressWarnings({"unused"})
 public class Util {
     //Colors code for Console
     public static String convertToAnsi(String input) {
         //Colours code
-        input = input.replaceAll("[§&]0", "\u001B[0;30m");
-        input = input.replaceAll("[§&]1", "\u001B[0;34m");
-        input = input.replaceAll("[§&]2", "\u001B[0;32m");
-        input = input.replaceAll("[§&]3", "\u001B[0;36m");
-        input = input.replaceAll("[§&]4", "\u001B[0;31m");
-        input = input.replaceAll("[§&]5", "\u001B[0;35m");
-        input = input.replaceAll("[§&]6", "\u001B[0;33m");
-        input = input.replaceAll("[§&]7", "\u001B[0;37m");
-        input = input.replaceAll("[§&]8", "\u001B[0;90m");
-        input = input.replaceAll("[§&]9", "\u001B[0;94m");
-        input = input.replaceAll("[§&]a", "\u001B[0;92m");
-        input = input.replaceAll("[§&]b", "\u001B[0;96m");
-        input = input.replaceAll("[§&]c", "\u001B[0;91m");
-        input = input.replaceAll("[§&]d", "\u001B[0;95m");
-        input = input.replaceAll("[§&]e", "\u001B[0;93m");
-        input = input.replaceAll("[§&]f", "\u001B[0;97m");
+        String[] ansiNumColors = {
+                "[0;30m",
+                "[0;34m",
+                "[0;32m",
+                "[0;36m",
+                "[0;31m",
+                "[0;35m",
+                "[0;33m",
+                "[0;37m",
+                "[0;90m",
+                "[0;94m",
+        };
+        for (int i = 0; i <= ansiNumColors.length; i++) {
+            input = input.replaceAll("[§&]" + i, "\u001B" + ansiNumColors[i]);
+        }
         //Additional Formatting codes
-        input = input.replaceAll("[§&]l", "\u001B[1m");
-        input = input.replaceAll("[§&]o", "\u001B[3m");
-        input = input.replaceAll("[§&]n", "\u001B[4m");
-        input = input.replaceAll("[§&]m", "\u001B[9m");
-        input = input.replaceAll("[§&]r", "\u001B[0m");
-
+        String[] charCodes = {
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+        };
+        String[] ansiCharColors = {
+                "[0;92m",
+                "[0;96m",
+                "[0;91m",
+                "[0;95m",
+                "[0;93m",
+                "[0;97m",
+        };
+        for (int i = 0; i < charCodes.length; i++) {
+            input = input.replaceAll("[§&]" + charCodes[i], "\u001B" + ansiCharColors[i]);
+        }
         return input;
     }
 
@@ -44,7 +57,6 @@ public class Util {
         for (char c : additionalFormatting) {
             input = input.replaceAll("&" + c, "§" + c);
         }
-
         return input;
     }
 }
