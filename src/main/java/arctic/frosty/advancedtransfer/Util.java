@@ -17,7 +17,7 @@ public class Util {
                 "[0;90m",
                 "[0;94m",
         };
-        for (int i = 0; i <= ansiNumColors.length; i++) {
+        for (int i = 0; i < ansiNumColors.length; i++) {
             input = input.replaceAll("[§&]" + i, "\u001B" + ansiNumColors[i]);
         }
         //Additional Formatting codes
