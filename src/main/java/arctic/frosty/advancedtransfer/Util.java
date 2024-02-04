@@ -5,7 +5,7 @@ public class Util {
     //Colors code for Console
     public static String convertToAnsi(String input) {
         //Colours code
-        String[] ansiNumColors = {
+        final String[] ansiNumColors = {
                 "[0;30m",
                 "[0;34m",
                 "[0;32m",
@@ -21,7 +21,7 @@ public class Util {
             input = input.replaceAll("[§&]" + i, "\u001B" + ansiNumColors[i]);
         }
         //Additional Formatting codes
-        String[] charCodes = {
+        final String[] charCodes = {
                 "a",
                 "b",
                 "c",
@@ -29,7 +29,7 @@ public class Util {
                 "e",
                 "f",
         };
-        String[] ansiCharColors = {
+        final String[] ansiCharColors = {
                 "[0;92m",
                 "[0;96m",
                 "[0;91m",
@@ -53,7 +53,7 @@ public class Util {
             input = input.replaceAll("&" + c, "§" + c);
         }
         //Additional Formatting codes
-        char[] additionalFormatting = {'l', 'o', 'n', 'm', 'r'};
+        final char[] additionalFormatting = {'l', 'o', 'n', 'm', 'r'};
         for (char c : additionalFormatting) {
             input = input.replaceAll("&" + c, "§" + c);
         }
