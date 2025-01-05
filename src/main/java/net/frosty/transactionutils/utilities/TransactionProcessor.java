@@ -28,6 +28,10 @@ public class TransactionProcessor {
             player.sendMessage(colourise("&cError: &4Player not found."));
             return;
         }
+        if (targetPlayer.getName().equals(player.getName())) {
+            player.sendMessage(colourise("&cError: &4You cannot transfer to yourself."));
+            return;
+        }
         final long amount = convertToWholeNumber(strAmount);
         if (strAmount.length() > 10) {
             player.sendMessage(colourise("&cError: &4Amount is too large."));
