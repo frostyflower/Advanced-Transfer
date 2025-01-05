@@ -1,22 +1,22 @@
-name: Advanced-Transfer
+name: TransactionUtil
 version: '${project.version}'
-main: arctic.frosty.advancedtransfer.Advanced_Transfer
+main: net.frosty.transactionutils.TransactionUtils
 api-version: '1.20'
-prefix: 'Advanced-Transfer'
-authors: [Arctic_FrostyMC]
+prefix: 'TransactionUtil'
+authors: [ FrostyFlower ]
 description: A simple plugin to enhance the transfer command.
 depend:
   - Vault
+softdepend:
   - Essentials
 commands:
   transfer:
     description: 'Transfer funds from one player to another.'
-    usage: '§4Usage: §c/transfer <player> <amount>'
     aliases:
       - pay
       - tran
-  advanced-transfer:
+  transactionutil:
     description: 'Reloading plugin configuration.'
-    usage: '§4Usage: §c/advanced-transfer reload'
+    usage: '§4Usage: §c/TransactionUtil reload.'
     aliases:
-      - at
+      - tu

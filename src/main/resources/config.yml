@@ -1,23 +1,10 @@
-# A simple plugin to enhance the transfer command.
+#A simple plugin to handle player transactions to other player.
 
-# Plugin Prefix.
-Prefix: "&7[&aAdvanced-Transfer&7] "
+#Input amount range. (Whole numbers only!)
+#Min can't be smaller than 1.
+#Max can't be 10 billions or larger, because it may introduce unwanted errors.
+Min: 10
+Max: 1000000
 
-# Currency symbol.
-Currency: $
-
-# Maximum paying amount.
-Max: 1000000000
-
-# Change Timezone to display the correct time for your server.
-# Follow this link to find your desired timezone.
-# https://docs.oracle.com/middleware/12211/wcs/tag-ref/MISC/TimeZones.html
-# Example: America/New_York
-Timezone: default
-
-# Logging threshold.
-# Set the threshold (Transferring amount) for the logger to write to the log file.
-Threshold: 10000
-
-# Log the transaction to console.
+#Log the transaction to console.
 Log: true
